@@ -20,11 +20,13 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.get('/', 'HomeController.index')
 
 Route.post('/register', "AuthController.register")
+
+Route.post('/send-mail-confirmation', 'AuthController.sendMailConfirmation')
+Route.get('/verify-account/:id/:token', 'AuthController.verifyAccount')
+
 Route.post('/login', "AuthController.login")
 
 Route.group(() => {
