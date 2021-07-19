@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@adonisjs/ace@^11.0.2":
+"@adonisjs/ace@^11.0.2", "@adonisjs/ace@^11.0.3":
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/@adonisjs/ace/-/ace-11.0.3.tgz#fb003d5de3c64c34c54b3462fb09f9e8c233507f"
   integrity sha512-nqAVFu8+r3HdSL4qePdItgTZSRSoNcLc2ks49Deptf8rl51Wk6H2vHesU2yLg7JHNW8+sY7lehZidTVqrG3wrA==
@@ -25,7 +25,7 @@
     "@poppinss/oauth-client" "^2.0.4"
     "@poppinss/utils" "^3.1.3"
 
-"@adonisjs/application@^5.1.3", "@adonisjs/application@^5.1.4":
+"@adonisjs/application@^5.1.3", "@adonisjs/application@^5.1.4", "@adonisjs/application@^5.1.5":
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@adonisjs/application/-/application-5.1.5.tgz#93831ab8c4d4d1107e2665d33ba78290bdb24666"
   integrity sha512-hzapilbQ+2Zbeac6RvmZBt56fj/H4aVNWhpM3PjlNOZZuUzVQmdSQd1dtkgmx7VJETPqXnRts8AlnWdF9xIbsw==
@@ -38,7 +38,7 @@
     "@poppinss/utils" "^3.1.4"
     semver "^7.3.5"
 
-"@adonisjs/assembler@^5.3.2":
+"@adonisjs/assembler@^5.0.0":
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/@adonisjs/assembler/-/assembler-5.3.2.tgz#e2d117552750394d845cb55fdbabdefd87a62a5b"
   integrity sha512-rznJDptvAvS+6kO7KU6IpS9NiCb5HwMpg3bzdqeQMZXeKTCk8bJmsFRNCq3ADlNTR2bTcgZfFEccjG+wIfxtDw==
@@ -90,7 +90,7 @@
   dependencies:
     "@poppinss/utils" "^3.1.4"
 
-"@adonisjs/core@^5.1.9":
+"@adonisjs/core@^5.1.0":
   version "5.1.9"
   resolved "https://registry.yarnpkg.com/@adonisjs/core/-/core-5.1.9.tgz#c574b25f2f30d232e9a3addd5cef4a79e461f57c"
   integrity sha512-QbpAJP/JeM+gYjTILdk05Q+PcxkN/JeOuidCd130W5RDbPIF+1LhIJBpQjyp0SCdBNi47jsTqi6aw75BHsM6BQ==

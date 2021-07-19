@@ -30,6 +30,6 @@ Route.get('/verify-account/:id/:token', 'AuthController.verifyAccount')
 Route.post('/login', "AuthController.login")
 
 Route.group(() => {
-  Route.get('/home', "HomeController.index")
+  Route.get('/home', "HomeController.home")
   Route.get('/users', "HomeController.users")
 }).middleware("auth")

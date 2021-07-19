@@ -2,8 +2,6 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Hash from '@ioc:Adonis/Core/Hash'
 import User from 'App/Models/User'
-import Database from '@ioc:Adonis/Lucid/Database'
-import { DateTime } from 'luxon'
 
 export default class AuthController {
   public async register({ request, response }: HttpContextContract) {
@@ -66,7 +64,7 @@ export default class AuthController {
     // Verify password
     if (user.emailVerifiedAt === null) {
       user.sendVerificationEmail()
-      return response.badRequest('Credentials email not verified! open your mail box')
+      return response.badRequest({ error: 'Credentials email not verified! open your mail box' })
     }
 
     await user.clearOldTokens()
