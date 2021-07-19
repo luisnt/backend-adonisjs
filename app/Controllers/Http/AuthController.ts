@@ -4,9 +4,13 @@ import User from 'App/Models/User'
 
 export default class AuthController {
     public async register({ request, response }: HttpContextContract) {
-        const { email, password } = request.all()
+        const { email, password } = await request.all()
+        const exists = await User.query().where('email', email).first()
+        if (exists){
+           return response.badRequest({error:`This email ${email} exists`})
+        }
         const user = await User.create({ email, password })
-        response.created(user)
+        return response.created(user)
     }
 
     public async login({ request, response, auth }: HttpContextContract) {
