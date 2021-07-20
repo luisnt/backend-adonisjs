@@ -17,6 +17,7 @@ export default class AuthController {
 
     return response.created(user)
   }
+  
   public async sendMailConfirmation({ request, response }: HttpContextContract) {
     const schemas = schema.create({
       email: schema.string({}, [rules.email()]),
