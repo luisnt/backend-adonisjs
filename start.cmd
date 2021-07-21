@@ -1,0 +1,16 @@
+@echo off
+@chcp 65001
+@cls
+@cd "C:\Users\Luis\Projects\NodeJS\ProjetoSVT\prod\server\"
+@echo REMOVENDO AS PASTAS DAS DEPENDÊNCIAS...
+@RD  node_modules /S /Q > nul
+@echo.
+@echo INSTALANDO DEPENDÊNCIAS PARA PRODUÇÃO...
+@cmd /c yarn install --production > nul 
+@echo INSTALANDO DEPENDÊNCIA PARA CLUSTER...
+@cmd /c yarn add -D pino-pretty > nul 
+@echo.
+@echo APLICANDO AS MIGRAÇÕES...
+@cmd /c ace migration:run > nul 
+@echo INICIANDO O CLUSTER POR CORE DO PROCESSADOR...
+@cmd /c @node cluster.js
