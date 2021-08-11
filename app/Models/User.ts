@@ -15,6 +15,9 @@ export default class User extends BaseModel {
   public name: string
 
   @column()
+  public cpf: string
+
+  @column()
   public email: string
 
   @column()
@@ -40,6 +43,7 @@ export default class User extends BaseModel {
     if (users.$dirty.password) {
       users.password = await Hash.make(users.password)
     }
+    users.cpf = await users?.cpf?.replace(/[^0-9]+/g,"")
   }
 
   public async clearOldTokens() {
@@ -49,7 +53,7 @@ export default class User extends BaseModel {
   public async sendVerificationEmail() {
     this.rememberMeToken = nanoid()
     await this.save()
-    const url = `${Env.get('APP_URL')}/verifyAccount/${this.id}/${this.rememberMeToken}`
+    const url = `${Env.get('APP_URL')}/verify/${this.id}/${this.rememberMeToken}`
     await Mail.send((message) => {
       message
         .from('verify@no-response-this-mail.com')

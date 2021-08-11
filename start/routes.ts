@@ -18,18 +18,18 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route from "@ioc:Adonis/Core/Route"
 
-Route.get('/', 'HomeController.index')
+Route.get("/", "HomeController.index")
 
-Route.post('/register', "AuthController.register")
+Route.post("/register", "AuthController.register")
 
-Route.post('/send-mail-confirmation', 'AuthController.sendMailConfirmation')
-Route.get('/verify-account/:id/:token', 'AuthController.verifyAccount')
+Route.post("/send-mail-confirmation", "AuthController.sendMailConfirmation")
+Route.post("/verify", "AuthController.verifyAccount")
 
-Route.post('/login', "AuthController.login")
+Route.post("/login", "AuthController.login")
 
 Route.group(() => {
-  Route.get('/home', "HomeController.home")
-  Route.get('/users', "HomeController.users")
+  Route.get("/home", "HomeController.home")
+  Route.get("/users", "HomeController.users")
 }).middleware("auth")
