@@ -31,5 +31,6 @@ Route.post("/login", "AuthController.login")
 
 Route.group(() => {
   Route.get("/home", "HomeController.home")
-  Route.get("/users", "HomeController.users")
+  Route.post("/request-card", "RequestedCardsController.store")
+  Route.get("/info-same-card", "RequestedCardsController.index")
 }).middleware("auth")

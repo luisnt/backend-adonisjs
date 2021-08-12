@@ -3,43 +3,23 @@ import {schema, rules} from "@ioc:Adonis/Core/Validator"
 import Hash from "@ioc:Adonis/Core/Hash"
 import User from "App/Models/User"
 import {DateTime} from "luxon"
+import {UserAuth} from "App/Controllers/Http/Interfaces/UserAuth"
+
+import RegisterRules from "App/Controllers/Http/Rules/RegisterRules"
+import LoginRules from "App/Controllers/Http/Rules/LoginRules"
 
 export default class AuthController {
   public async register({request, response}: HttpContextContract) {
-    const schemas = schema.create({
-      name: schema.string({}, [rules.required()]),
-      cpf: schema.string({}, [rules.required(), rules.unique({table: "users", column: "cpf"})]),
-      email: schema.string({}, [
-        rules.required(),
-        rules.email(),
-        rules.unique({table: "users", column: "email"}),
-      ]),
-      password: schema.string({}, [rules.required(), rules.confirmed()]),
-    })
     let data = {}
     try {
-      data = await request.validate({
-        schema: schemas,
-        messages: {
-          "name.required": "Informe um valor para o campo NOME.",
-          "cpf.required": "Informe um valor para o campo CPF.",
-          "cpf.unique": "CPF já utilizado.",
-          "email.required": "Informe um valor para o campo E-MAIL.",
-          "email.email": "Informe um email válido.",
-          "email.unique": "Email já utilizado.",
-          "password.required": "Informe um valor para o campo SENHA.",
-          "password.confirmed": "A confirmação deve ser igual a senha.",
-        },
-      })
+      data = await request.validate(RegisterRules)
     } catch (error) {
       const errors = error.messages.errors ?? []
       return response.notAcceptable(errors)
     }
-
+    console.log({data})
     const user = await User.create(data)
-
     await user?.sendVerificationEmail()
-
     return response.created(user)
   }
 
@@ -62,58 +42,35 @@ export default class AuthController {
   }
 
   public async verifyAccount({request, response}: HttpContextContract) {
-    const {id, mailToken} = await request.all()
-
-    console.log({id, mailToken})
-
+    const {id, mailToken} = await request.body()
     const user = await User.findOrFail(id)
-
     const saved = await user?.saveEmailVerifyAt(mailToken)
-    const {name, email, emailVerifiedAt} = user
-
-    const body = {
-      id,
-      name,
-      email,
-      emailVerifiedAt: emailVerifiedAt?.setLocale("pt-br").toLocaleString(DateTime.DATETIME_SHORT), //toLocal().toSQL({includeOffset: false}),
-      saved,
-    }
-
-    console.log({...body})
-    return response.accepted(body)
+    const {name, email, emailVerifiedAt: verifiedAt} = user
+    const emailVerifiedAt = verifiedAt?.setLocale("pt-br").toLocaleString(DateTime.DATETIME_SHORT)
+    return response.accepted({id, name, email, emailVerifiedAt, saved})
   }
 
   public async login({request, response, auth}: HttpContextContract) {
-    const schemas = schema.create({
-      email: schema.string({}, [rules.required(), rules.email()]),
-      password: schema.string({}, [rules.required()]),
-    })
-    const {email, password} = await request.validate({schema: schemas})
+    const {email: login, password} = await request.validate(LoginRules)
 
-    // Lookup user manually
-    const user = await User.query().where("email", email).andWhere("active", true).firstOrFail()
+    const user = await User.query().where("email", login).andWhere("active", true).firstOrFail()
 
-    // Verify password
     if (!(await Hash.verify(user.password, password))) {
       const status = 400
       const message = "Acesso Negado! Credenciais inválidas"
       return response.badRequest({status, message})
     }
 
-    // Verify password
     if (user.emailVerifiedAt === null) {
       user.sendVerificationEmail()
       const status = 400
-      const message =
-        "O e-mail com as credenciais não foi verificado! abra sua caixa de correio e proceda com a verificação."
+      const message = `
+        Sua conta não está habilitada!
+        Abra sua caixa de correio e faça a verificação.
+        `
       return response.badRequest({status, message})
     }
-
-    await user.clearOldTokens()
-
-    // Generate token
-    const {type, token} = await auth.use("api").generate(user, {expiresIn: "30mins"})
-
-    response.created({token: `${type} ${token}`})
+    const {token, cpf, name, email} = (await user.generateToken(auth)) as UserAuth
+    response.created({token, cpf, name, email} as UserAuth)
   }
 }
