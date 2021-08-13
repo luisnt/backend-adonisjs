@@ -4,7 +4,7 @@ import RequestedCardRules from "App/Controllers/Http/Rules/RequestedCardRules"
 import RequestedCard from "App/Models/RequestedCard"
 
 export default class RequestedCardsController {
-  public async index({request, response, auth}: HttpContextContract) {
+  public async index({response, auth}: HttpContextContract) {
     const user_id = auth.user?.id || 0
     const card = await RequestedCard.findByOrFail("user_id", user_id)
     const date = card.createdAt.toLocaleString(DateTime.DATETIME_SHORT)
