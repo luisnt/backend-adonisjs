@@ -5,8 +5,8 @@ import RequestedCard from "App/Models/RequestedCard"
 
 export default class RequestedCardsController {
   public async index({response, auth}: HttpContextContract) {
-    const user_id = auth.user?.id || 0
-    const card = await RequestedCard.findByOrFail("user_id", user_id)
+    const userId = auth.user?.id || 0
+    const card = await RequestedCard.findByOrFail("user_id", userId)
     const date = card.createdAt.toLocaleString(DateTime.DATETIME_SHORT)
     const status = "Cartão solicitado com sucesso"
     return response.ok([{date, status}])
@@ -15,8 +15,8 @@ export default class RequestedCardsController {
   public async store({request, response, auth}: HttpContextContract) {
     let data = {}
     const body = request.body()
-    const user_id = auth.user?.id || 0
-    const parsed = {...body, user_id: +user_id}
+    const userId = auth.user?.id || 0
+    const parsed = {...body, user_id: +userId}
     request.updateBody(parsed)
 
     try {

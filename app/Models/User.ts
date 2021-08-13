@@ -47,8 +47,8 @@ export default class User extends BaseModel {
   }
 
   public static async extractTokenID(auth: ProviderTokenContract): Promise<number> {
-    const { token: { userId: user_id } } = auth.use("api")
-    return +user_id
+    const { token: { userId } } = auth.use("api")
+    return +userId
   }
 
   public async generateToken(auth: AuthContract) {
