@@ -12,3 +12,4 @@ declare module '@ioc:Adonis/Addons/Mail' {
     smtp: MailDrivers['smtp'],
   }
 }
+

@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "e-svt",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -35,6 +35,7 @@
     "@adonisjs/repl": "^3.1.4",
     "@adonisjs/session": "^6.1.0",
     "@adonisjs/view": "^6.0.6",
+    "@types/node": "^16.6.1",
     "luxon": "^2.0.1",
     "nanoid": "^3.1.23",
     "pg": "^8.7.1",

@@ -47,9 +47,9 @@ const mailConfig: MailConfig = {
       host: Env.get('SMTP_HOST'),
       port: Env.get('SMTP_PORT'),
 			auth: {
+				type: 'login',
 				user: Env.get('SMTP_USERNAME'),
 				pass: Env.get('SMTP_PASSWORD'),
-				type: 'login',
 			}
     },
 

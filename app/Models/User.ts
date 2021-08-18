@@ -80,7 +80,7 @@ export default class User extends BaseModel {
     this.rememberMeToken = nanoid()
     await this.save()
     const url = `${Env.get("APP_URL")}/verify/${this.id}/${this.rememberMeToken}`
-    await Mail.send((message) => {
+    await Mail.sendLater((message) => {
       message
         .from("verify@no-response-this-mail.com")
         .to(this.email)
@@ -103,7 +103,7 @@ export default class User extends BaseModel {
     this.rememberMeToken = nanoid()
     await this.save()
     const url = `${Env.get("APP_URL")}/reset/${this.id}/${this.rememberMeToken}`
-    await Mail.send((message) => {
+    await Mail.sendLater((message) => {
       message
         .from("verify@no-response-this-mail.com")
         .to(this.email)
