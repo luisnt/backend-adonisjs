@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node ace build --production",
-    "start": "node server.js",
+    "start": "ENV_SILENT=true node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
@@ -35,7 +35,7 @@
     "@adonisjs/view": "^6.0.6",
     "luxon": "^2.0.1",
     "nanoid": "^3.1.23",
-    "pg": "^8.6.0",
+    "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
