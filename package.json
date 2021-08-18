@@ -7,10 +7,11 @@
   },
   "private": true,
   "scripts": {
-    "deploy": "git ci --production",
+    "deploy": "npm i",
     "db": "node ace migration:run",
+    "ci": "cd build && npm ci --production",
     "build": "node ace build --production --ignore-ts-errors",
-    "start": "ENV_SILENT=true node ./build/server.js",
+    "start": "ENV_SILENT=true node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
