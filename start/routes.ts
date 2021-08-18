@@ -22,9 +22,12 @@ import Route from "@ioc:Adonis/Core/Route"
 
 Route.get("/", "HomeController.index")
 Route.post("/register", "AuthController.register")
-Route.post("/send-mail-confirmation", "AuthController.sendMailConfirmation")
+//Route.post("/send-mail-confirmation", "AuthController.sendMailConfirmation")
+Route.post("/password-reset", "AuthController.passwordReset")
+Route.post("/password-change", "AuthController.passwordChange")
 Route.post("/verify", "AuthController.verifyAccount")
 Route.post("/login", "AuthController.login")
+Route.post("/logout", "AuthController.logout")
 
 Route.group(() => {
   Route.get("/home", "HomeController.home")

@@ -6,7 +6,7 @@ import {column, beforeSave, BaseModel} from "@ioc:Adonis/Lucid/Orm"
 import {DateTime} from "luxon"
 import {nanoid} from "nanoid"
 import {base64} from "@ioc:Adonis/Core/Helpers"
-import {AuthContract, ProviderTokenContract} from "@ioc:Adonis/Addons/Auth"
+import {AuthContract} from "@ioc:Adonis/Addons/Auth"
 
 export default class User extends BaseModel {
   @column({isPrimary: true})
@@ -28,7 +28,7 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
-  public rememberMeToken?: string
+  public rememberMeToken?: string | null
 
   @column()
   public active: boolean
@@ -46,8 +46,10 @@ export default class User extends BaseModel {
     }
   }
 
-  public static async extractTokenID(auth: ProviderTokenContract): Promise<number> {
-    const { token: { userId } } = auth.use("api")
+  public static async extractTokenID(auth: any): Promise<number> {
+    const {
+      token: {userId},
+    } = auth.use("api")
     return +userId
   }
 
@@ -95,5 +97,18 @@ export default class User extends BaseModel {
       return true
     }
     return false
+  }
+
+  public async sendEmailPasswordReset() {
+    this.rememberMeToken = nanoid()
+    await this.save()
+    const url = `${Env.get("APP_URL")}/reset/${this.id}/${this.rememberMeToken}`
+    await Mail.send((message) => {
+      message
+        .from("verify@no-response-this-mail.com")
+        .to(this.email)
+        .subject("Solicitação de redefinição da senha!")
+        .htmlView("emails/reset", {user: this, url})
+    })
   }
 }
