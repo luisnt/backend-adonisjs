@@ -18,8 +18,7 @@
       "@adonisjs/lucid",
       "@adonisjs/auth",
       "@adonisjs/mail",
-      "@adonisjs/view",
-      "@adonisjs/assembler"
+      "@adonisjs/view"
     ]
   }
 }
