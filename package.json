@@ -7,10 +7,10 @@
   },
   "private": true,
   "scripts": {
-    "deploy": "npm i @adonisjs/assembler",
+    "deploy": "npm i @adonisjs/assembler --force",
     "db": "node ace migration:run",
     "build": "node ace build --production --ignore-ts-errors",
-    "start": "ENV_SILENT=true node server.js",
+    "start": "ENV_SILENT=true node build/server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
