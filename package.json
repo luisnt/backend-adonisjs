@@ -7,7 +7,7 @@
   },
   "private": true,
   "scripts": {
-    "deploy": "npm i",
+    "deploy": "git ci --production",
     "db": "node ace migration:run",
     "build": "node ace build --production --ignore-ts-errors",
     "start": "ENV_SILENT=true node ./build/server.js",
