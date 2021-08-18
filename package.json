@@ -1,18 +1,13 @@
 {
   "name": "e-svt",
   "version": "1.0.0",
+  "main": "web.js",
   "engines": {
-    "node": "14.x",
-    "npm": "7.x"
+    "node": "14.x"
   },
   "private": true,
   "scripts": {
-    "build": "node ace build --production --ignore-ts-errors",
-    "deploy1": "cd build",
-    "deploy3": "npm install --save-dev @adonisjs/assembler",
-    "deploy2": "npm install",
-    "deploy4": "npm ci --production",
-    "deploy5": "node ace migration:run",
+    "build": "node ace build --production",
     "start": "ENV_SILENT=true node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
