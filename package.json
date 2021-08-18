@@ -7,8 +7,7 @@
   },
   "private": true,
   "scripts": {
-    "deploy": "cd build && npm ci --production",
-    "audit": "npm audit fix",
+    "deploy": "cd build && npm install --save-dev @adonisjs/assembler && npm ci --production",
     "db": "node ace migration:run",
     "build": "node ace build --production --ignore-ts-errors",
     "start": "ENV_SILENT=true node server.js",
