@@ -4,6 +4,23 @@ import RequestedCardRules from "App/Controllers/Http/Rules/RequestedCardRules"
 import RequestedCard from "App/Models/RequestedCard"
 
 export default class RequestedCardsController {
+  public async home({request, response}: HttpContextContract) {
+    const {accept, authorization} = request.headers()
+    const params = request.all()
+    const message = "bem vindo a área privada"
+    const server = "Adonis JS Api"
+    const now = DateTime.local().toSQL({includeOffset: false})
+
+    return response.ok({
+      server,
+      now,
+      message,
+      accept,
+      authorization,
+      params,
+    })
+  }
+
   public async index({response, auth}: HttpContextContract) {
     const userId = auth.user?.id || 0
     const card = await RequestedCard.findByOrFail("user_id", userId)

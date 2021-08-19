@@ -28,13 +28,8 @@ export default class AuthController {
     const {email} = user
 
     const message = `
-      Uma confirmação foi enviada ao email <i>${email}</i>.<br /><br />
-      <b>Siga as instruções:</b><br />
-      <span>1º - Acesse o email <b>${email}</b></span><br />
-      <span>2º - No corpo do email clique no botão </span><br />
-      <br />
-      <span><a>Confirme seu email aqui</a>.</span>
-      <br /><br />
+    Uma confirmação foi enviada ao email ${email}.
+    Confirme seu email para ter acesso ao sistema.
     `
 
     return response.created(message)
