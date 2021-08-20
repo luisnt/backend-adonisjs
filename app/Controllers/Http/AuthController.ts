@@ -112,12 +112,12 @@ export default class AuthController {
 
     user.sendEmailPasswordReset()
 
-    const [, caixa] = login.split("@")
+    // const [, caixa] = login.split("@")
     const message = `
       <p>Um email foi enviado para ${login} com uma solicitação de mudança da senha.</p>
       <p>Abra a caixa de correio para continuar.</p>
-      <p><a href="https://www.${caixa}" target="_blank">www.${caixa}</a></p>
-    `
+        `
+    // <p><a href="https://www.${caixa}" target="_blank">www.${caixa}</a></p>
     return response.accepted(message)
   }
 
@@ -154,7 +154,7 @@ export default class AuthController {
     user.merge({password, rememberMeToken})
     await user.save()
 
-    const message = "A senha da sua conta foi alterada com sucesso."
+    const message = `A senha da conta do usuário ${user.name} foi alterada com sucesso.`
     return response.accepted(message)
   }
 }
