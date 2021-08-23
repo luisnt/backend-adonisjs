@@ -14,7 +14,6 @@ import PasswordChangeRules from "./Rules/PasswordChangeRules"
 
 export default class AuthController {
   public async register({request, response}: HttpContextContract) {
-    //await Database.rawQuery(`delete from public.users`).exec()
     let data: any
     try {
       data = await request.validate(RegisterRules)

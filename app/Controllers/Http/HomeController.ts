@@ -3,6 +3,9 @@ import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext"
 import {DateTime} from "luxon"
 import PasswordResetRules from "./Rules/PasswordResetRules"
 
+interface SecId {
+  id: string
+}
 export default class HomeController {
   public async index({request, response}: HttpContextContract) {
     const {accept} = request.headers()
@@ -23,7 +26,7 @@ export default class HomeController {
   }
 
   public async mail({request, response}: HttpContextContract) {
-    const {id} = request.params
+    const {id} = request.params()
     if (process.env.NODE_ENV !== "production" || id === "777") {
       const {email} = await request.validate(PasswordResetRules)
       const message = "Rota de teste de envio de email."
