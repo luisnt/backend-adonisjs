@@ -3,9 +3,6 @@ import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext"
 import {DateTime} from "luxon"
 import PasswordResetRules from "./Rules/PasswordResetRules"
 
-interface SecId {
-  id: string
-}
 export default class HomeController {
   public async index({request, response}: HttpContextContract) {
     const {accept} = request.headers()
