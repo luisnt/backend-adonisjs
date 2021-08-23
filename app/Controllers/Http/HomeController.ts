@@ -2,12 +2,13 @@ import Mail from "@ioc:Adonis/Addons/Mail"
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext"
 import {DateTime} from "luxon"
 import PasswordResetRules from "./Rules/PasswordResetRules"
+
 import {name as AppName, version} from "../../../package.json"
 
 export default class HomeController {
   public async index({request, response}: HttpContextContract) {
     const {accept} = request.headers()
-    const message = "bem vindo a área pública"
+    const message = "Bem vindo a área pública"
     const server = `${AppName} .:. ${version} .:. Adonis JS Api`
     const now = DateTime.local().toSQL({includeOffset: false})
 
