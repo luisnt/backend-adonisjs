@@ -8,7 +8,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "node ace build --production --resolveJsonModule",
+    "build": "node ace build --production",
     "start": "ENV_SILENT=true node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
