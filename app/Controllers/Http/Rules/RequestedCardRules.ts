@@ -1,8 +1,10 @@
 import {schema, rules} from "@ioc:Adonis/Core/Validator"
 
 const validations = schema.create({
-
-  user_id: schema.number([rules.required(), rules.unique({table: "requested_cards", column: "user_id"})]),
+  user_id: schema.number([
+    rules.required(),
+    rules.unique({table: "requested_cards", column: "user_id"}),
+  ]),
 
   birth: schema.date({}, [rules.required()]),
   sex: schema.string({}, [rules.required()]),
@@ -17,10 +19,11 @@ const validations = schema.create({
 })
 
 const messages = {
-  "user_id.required": 'A conexão expirou. Faça login novamente para continuar',
-  "user_id.unique": 'Cartão já solicitado',
+  "user_id.required": "A conexão expirou. Faça login novamente para continuar",
+  "user_id.unique": "Cartão já solicitado",
 
   "birth.required": "Informe um valor para o campo NASCIDO.",
+  "birth.date.format": "Informe uma data válida campo NASCIDO.",
   "sex.required": "Informe um valor para o campo SEXO.",
 
   "address_cep.required": "Informe um valor para o campo CEP.",
