@@ -1,6 +1,6 @@
 {
   "name": "e-svt",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "server.js",
   "engines": {
     "node": "14.x",

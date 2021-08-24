@@ -9,7 +9,7 @@ export default class RequestedCardsController {
     const params = request.all()
     const message = "bem vindo a área privada"
     const server = "Adonis JS Api"
-    const now = DateTime.local().toSQL({includeOffset: false})
+    const now = DateTime.local().toFormat("dd/MM/yyyy HH:mm:ss")
 
     return response.ok({
       server,

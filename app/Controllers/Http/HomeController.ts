@@ -10,7 +10,7 @@ export default class HomeController {
     const {accept} = request.headers()
     const message = "Bem vindo a área pública"
     const server = `${AppName} .:. ${version} .:. Adonis JS Api`
-    const now = DateTime.local().toSQL({includeOffset: false})
+    const now = DateTime.local().toFormat("dd/MM/yyyy HH:mm:ss")
 
     return response.ok({
       server,
@@ -26,7 +26,7 @@ export default class HomeController {
       const {email} = await request.validate(PasswordResetRules)
       const message = "Rota de teste de envio de email."
       const server = `Adonis JS Api - Send Mail to ${email}`
-      const now = DateTime.local().toSQL({includeOffset: false})
+      const now = DateTime.local().toFormat("dd/MM/yyyy HH:mm:ss")
 
       const user = {name: "Luis Nt - Testando...", email}
 
