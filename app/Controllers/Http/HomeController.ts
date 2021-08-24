@@ -31,13 +31,22 @@ export default class HomeController {
       const user = {name: "Luis Nt - Testando...", email}
 
       const url = `https://www.cartaovt.com.br`
-      await Mail.sendLater((message) => {
+      Mail.sendLater((message) => {
         message
           .from("verify@no-response-this-mail.com")
           .to(email)
-          .subject(`Teste de Envio de Email: ${now}`)
+          .subject(`Teste verify de Envio de Email: ${now}`)
+          .htmlView("emails/verify", {user, url})
+      })
+
+      Mail.sendLater((message) => {
+        message
+          .from("verify@no-response-this-mail.com")
+          .to(email)
+          .subject(`Teste reset Email: ${now}`)
           .htmlView("emails/reset", {user, url})
       })
+
       return response.ok({
         server,
         now,
