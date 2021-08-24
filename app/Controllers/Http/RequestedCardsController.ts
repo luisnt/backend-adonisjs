@@ -24,7 +24,7 @@ export default class RequestedCardsController {
   public async index({response, auth}: HttpContextContract) {
     const userId = auth.user?.id || 0
     const card = await RequestedCard.findByOrFail("user_id", userId)
-    const date = card.createdAt.toLocaleString(DateTime.DATETIME_SHORT)
+    const date = card.createdAt.toFormat("dd/MM/yyyy HH:mm")
     const status = "Cartão solicitado com sucesso"
     return response.ok([{date, status}])
   }
