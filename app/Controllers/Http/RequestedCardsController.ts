@@ -2,6 +2,7 @@ import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext"
 import {DateTime} from "luxon"
 import RequestedCardRules from "App/Controllers/Http/Rules/RequestedCardRules"
 import RequestedCard from "App/Models/RequestedCard"
+import User from "App/Models/User"
 
 export default class RequestedCardsController {
   public async home({request, response}: HttpContextContract) {
@@ -27,6 +28,18 @@ export default class RequestedCardsController {
     const date = card.createdAt.toFormat("dd/MM/yyyy HH:mm")
     const status = "Cartão solicitado com sucesso"
     return response.ok([{date, status}])
+  }
+
+  public async show({request, response}: HttpContextContract) {
+    const {cpf} = request.params()
+    const [user] = await User.query().select(["id", "name", "email"]).where("cpf", cpf)
+    const card = await RequestedCard.findBy("user_id", user.id)
+    const now = DateTime.local().toFormat("dd/MM/yyyy HH:mm")
+    const date = card?.createdAt.toFormat("dd/MM/yyyy HH:mm")
+    const status = date !== undefined ? "Cartão solicitado com sucesso" : "Cartão não solicitado"
+    const requestedCard = {date: date || now, status}
+    const {id, name, email} = user
+    return response.ok({id, name, email, ...requestedCard})
   }
 
   public async store({request, response, auth}: HttpContextContract) {

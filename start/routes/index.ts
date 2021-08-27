@@ -18,7 +18,7 @@
 |
 */
 
-import "./routes/Public/Home"
-import "./routes/Public/Auth"
+import "./Public/Home"
+import "./Public/Auth"
 
-import "./routes/Protected/RequestedCards"
+import "./Protected/RequestedCards"
