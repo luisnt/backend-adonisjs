@@ -13,6 +13,11 @@ import PasswordChangeRules from "./Rules/PasswordChangeRules"
 // import Database from "@ioc:Adonis/Lucid/Database"
 
 export default class AuthController {
+  public async user({response, auth}: HttpContextContract) {
+    const {id, name, email, cpf} = auth.user!
+    return response.ok({id, name, email, cpf})
+  }
+
   public async register({request, response}: HttpContextContract) {
     let data: any
     try {
