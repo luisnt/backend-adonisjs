@@ -60,8 +60,8 @@ export default class AuthController {
   public async verifyAccount({request, response}: HttpContextContract) {
     const {id, mailToken} = await request.body()
     const user = await User.findOrFail(id)
-    await user?.saveEmailVerifyAt(mailToken)
     const {name, email, emailVerifiedAt: verifiedAt} = user
+    await user?.saveEmailVerifyAt(mailToken)
     const emailVerifiedAt = verifiedAt?.setLocale("pt-br").toLocaleString(DateTime.DATETIME_SHORT)
 
     const message = `
