@@ -1,10 +1,10 @@
 import {schema, rules} from "@ioc:Adonis/Core/Validator"
 
 const validations = schema.create({
-  id: schema.string({}, [rules.required()]),
-  token: schema.string({}, [rules.required()]),
-  key: schema.string({}, [rules.required()]),
-  password: schema.string({}, [rules.required(), rules.confirmed("password_confirmation")]),
+  id: schema.string({trim: true}, [rules.required()]),
+  token: schema.string({trim: true}, [rules.required()]),
+  key: schema.string({trim: true}, [rules.required()]),
+  password: schema.string({trim: true}, [rules.required(), rules.confirmed("password_confirmation")]),
 })
 
 const messages = {

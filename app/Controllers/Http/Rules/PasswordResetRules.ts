@@ -1,7 +1,7 @@
 import {schema, rules} from "@ioc:Adonis/Core/Validator"
 
 const validations = schema.create({
-  email: schema.string({}, [
+  email: schema.string({trim: true}, [
     rules.required(),
     rules.email(),
     rules.exists({table: "users", column: "email"}),
