@@ -35,6 +35,9 @@ export default class RequestedCard extends BaseModel {
   @column()
   public address_state: string
 
+  @column()
+  public phone: string
+
   @column.dateTime({autoCreate: true})
   public createdAt: DateTime
 

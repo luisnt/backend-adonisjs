@@ -7,15 +7,17 @@ const validations = schema.create({
   ]),
 
   birth: schema.date({}, [rules.required()]),
-  sex: schema.string({}, [rules.required()]),
+  sex: schema.string({trim:true}, [rules.required()]),
 
-  address_cep: schema.string({}, [rules.required()]),
-  address_road: schema.string({}, [rules.required()]),
-  address_number: schema.string({}, [rules.required()]),
-  address_complement: schema.string({}, [rules.required()]),
-  address_district: schema.string({}, [rules.required()]),
-  address_city: schema.string({}, [rules.required()]),
-  address_state: schema.string({}, [rules.required()]),
+  address_cep: schema.string({trim:true}, [rules.required()]),
+  address_road: schema.string({trim:true}, [rules.required()]),
+  address_number: schema.string({trim:true}, [rules.required()]),
+  address_complement: schema.string({trim:true}, [rules.required()]),
+  address_district: schema.string({trim:true}, [rules.required()]),
+  address_city: schema.string({trim:true}, [rules.required()]),
+  address_state: schema.string({trim:true}, [rules.required()]),
+
+  phone: schema.string({trim:true}),
 })
 
 const messages = {
@@ -32,7 +34,7 @@ const messages = {
   "address_complement.required": "Informe um valor para o campo COMPLEMENTO.",
   "address_district.required": "Informe um valor para o campo BAIRRO.",
   "address_city.required": "Informe um valor para o campo CIDADE.",
-  "address_state.required": "Informe um valor para o campo UF.",
+  "address_state.required": "Informe um valor para o campo UF."
 }
 
 const RequestCardRules = {schema: validations, messages}
