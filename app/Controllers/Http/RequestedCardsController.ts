@@ -37,9 +37,9 @@ export default class RequestedCardsController {
     const now = DateTime.local().toFormat("dd/MM/yyyy HH:mm")
     const date = card?.createdAt.toFormat("dd/MM/yyyy HH:mm")
     const status = date !== undefined ? "Cartão solicitado com sucesso" : "Cartão não solicitado"
-    const requestedCard = {date: date || now, status}
+    const historic = [{date: date || now, status}]
     const {id, name, email} = user
-    return response.ok({id, name, email, ...requestedCard})
+    return response.ok({id, name, email, historic})
   }
 
   public async store({request, response, auth}: HttpContextContract) {
