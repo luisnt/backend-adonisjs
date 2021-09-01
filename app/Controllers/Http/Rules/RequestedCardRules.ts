@@ -17,7 +17,7 @@ const validations = schema.create({
   address_city: schema.string({escape: true, trim: true}, [rules.required()]),
   address_state: schema.string({escape: true, trim: true}, [rules.required()]),
 
-  phone: schema.string.optional({escape: true, trim: true}),
+  phone: schema.string.optional({escape: true, trim: true}, [rules.mobile({locales: ["pt-BR"]})]),
 })
 
 const messages = {
